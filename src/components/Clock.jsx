@@ -8,7 +8,6 @@ const Clock = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Formato HH:MM:SS
   const formatTime = (date) => {
     return date.toLocaleTimeString('en-US', { hour12: false });
   };

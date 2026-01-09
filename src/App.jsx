@@ -37,7 +37,6 @@ const Taskbar = ({ openWindow }) => {
       <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-1 md:gap-4">
         <TaskIcon icon={<FiFolder size={20} />} label="FILES" onClick={() => openWindow('projects')} color="hover:text-yellow-400" />
         <TaskIcon icon={<FiCode size={20} />} label="VS_CODE" color="hover:text-blue-400" />
-        {/* GITHUB AHORA ABRE UNA VENTANA */}
         <TaskIcon icon={<FiGithub size={20} />} label="GITHUB" onClick={() => openWindow('github')} color="hover:text-white" />
         <TaskIcon icon={<SiDiscord size={20} />} label="DISCORD" onClick={() => openWindow('discord')} color="hover:text-[#5865F2]" />
         <TaskIcon icon={<SiEpicgames size={18} />} label="EPIC_GAMES" color="hover:text-white" />
@@ -89,6 +88,8 @@ const CONTENT = {
     <div className="font-mono text-sm uppercase p-2">
       <p className="text-hack-light mb-4 animate-pulse lowercase tracking-tighter font-bold"> accessing encrypted archives...</p>
       <div className="grid grid-cols-1 gap-4">
+        
+        {/* PROYECTO 1: MC TOOLS */}
         <div className="border-2 border-hack-green bg-hack-darker/50 p-4 relative group hover:shadow-[0_0_15px_rgba(0,255,0,0.3)] transition-all font-bold">
             <div className="absolute top-0 right-0 bg-hack-green text-black text-[10px] font-black px-2 py-0.5 uppercase tracking-widest">Public_Release</div>
             <h3 className="font-black text-lg mb-1 flex items-center gap-2 text-hack-green uppercase tracking-wider"><FiFolder /> MC_TOOLS_WEB</h3>
@@ -99,20 +100,43 @@ const CONTENT = {
                 <span className="bg-hack-green/20 px-2 border border-hack-green/50">THREE.JS</span>
             </div>
             <div className="flex gap-2">
-                <button className="flex-1 border-2 border-hack-green hover:bg-hack-green hover:text-black py-1 text-xs font-black transition-colors text-white cursor-pointer uppercase">Demo</button>
-                <button className="flex-1 border-2 border-hack-green hover:bg-hack-green hover:text-black py-1 text-xs font-black transition-colors text-white cursor-pointer uppercase">Code</button>
+                <a href="https://more-tools.vercel.app" target="_blank" rel="noreferrer" className="flex-1 border-2 border-hack-green hover:bg-hack-green hover:text-black py-1 text-xs font-black transition-colors text-white cursor-pointer uppercase flex items-center justify-center">Demo</a>
+                <a href="https://github.com/gemo42/MoreTools.git" target="_blank" rel="noreferrer" className="flex-1 border-2 border-hack-green hover:bg-hack-green hover:text-black py-1 text-xs font-black transition-colors text-white cursor-pointer uppercase flex items-center justify-center">Code</a>
             </div>
         </div>
+
+        {/* PROYECTO 2: TATTOO STUDIO */}
         <div className="border-2 border-hack-green bg-hack-darker/50 p-4 relative group hover:shadow-[0_0_15px_rgba(0,255,0,0.3)] transition-all font-bold">
-            <div className="absolute top-0 right-0 bg-hack-green text-black text-[10px] font-black px-2 py-0.5 uppercase tracking-widest">Beta_V2</div>
-            <h3 className="font-black text-lg mb-1 flex items-center gap-2 text-hack-green uppercase tracking-wider"><FiFolder /> ADULT_CARD_GAME</h3>
+            <div className="absolute top-0 right-0 bg-hack-green text-black text-[10px] font-black px-2 py-0.5 uppercase tracking-widest">Design</div>
+            <h3 className="font-black text-lg mb-1 flex items-center gap-2 text-hack-green uppercase tracking-wider"><FiFolder /> TATTOO_STUDIO</h3>
             <div className="h-[1px] w-full bg-hack-green/30 my-2"></div>
-            <p className="text-xs text-hack-light mb-3 lowercase font-mono">Motor de juego multijugador con WebSockets para partidas en tiempo real.</p>
+            <p className="text-xs text-hack-light mb-3 lowercase font-mono">Landing page para estudio de tatuajes con temática Neon Retro Tokyo. Estética visual de alto impacto.</p>
             <div className="flex gap-2 text-[10px] tracking-wider mb-4 text-white font-black">
-                <span className="bg-hack-green/20 px-2 border border-hack-green/50">NODE.JS</span>
-                <span className="bg-hack-green/20 px-2 border border-hack-green/50">SOCKET.IO</span>
+                <span className="bg-hack-green/20 px-2 border border-hack-green/50">HTML/CSS</span>
+                <span className="bg-hack-green/20 px-2 border border-hack-green/50">JS</span>
+            </div>
+            <div className="flex gap-2">
+                <a href="https://tattoo-studio-2hxcx0o43-gemo42s-projects.vercel.app" target="_blank" rel="noreferrer" className="flex-1 border-2 border-hack-green hover:bg-hack-green hover:text-black py-1 text-xs font-black transition-colors text-white cursor-pointer uppercase flex items-center justify-center">Demo</a>
+                <a href="https://github.com/gemo42/tattoo-studio.git" target="_blank" rel="noreferrer" className="flex-1 border-2 border-hack-green hover:bg-hack-green hover:text-black py-1 text-xs font-black transition-colors text-white cursor-pointer uppercase flex items-center justify-center">Code</a>
             </div>
         </div>
+
+        {/* PROYECTO 3: VALFIT GYM */}
+        <div className="border-2 border-hack-green bg-hack-darker/50 p-4 relative group hover:shadow-[0_0_15px_rgba(0,255,0,0.3)] transition-all font-bold">
+            <div className="absolute top-0 right-0 bg-hack-green text-black text-[10px] font-black px-2 py-0.5 uppercase tracking-widest">UI/UX</div>
+            <h3 className="font-black text-lg mb-1 flex items-center gap-2 text-hack-green uppercase tracking-wider"><FiFolder /> VALFIT_GYM</h3>
+            <div className="h-[1px] w-full bg-hack-green/30 my-2"></div>
+            <p className="text-xs text-hack-light mb-3 lowercase font-mono">Sitio web para gimnasio de alto rendimiento. Diseño agresivo, moderno y totalmente responsivo.</p>
+            <div className="flex gap-2 text-[10px] tracking-wider mb-4 text-white font-black">
+                <span className="bg-hack-green/20 px-2 border border-hack-green/50">REACT</span>
+                <span className="bg-hack-green/20 px-2 border border-hack-green/50">TAILWIND</span>
+            </div>
+            <div className="flex gap-2">
+                <a href="https://valfit.vercel.app" target="_blank" rel="noreferrer" className="flex-1 border-2 border-hack-green hover:bg-hack-green hover:text-black py-1 text-xs font-black transition-colors text-white cursor-pointer uppercase flex items-center justify-center">Demo</a>
+                <a href="https://github.com/gemo42/valfit.git" target="_blank" rel="noreferrer" className="flex-1 border-2 border-hack-green hover:bg-hack-green hover:text-black py-1 text-xs font-black transition-colors text-white cursor-pointer uppercase flex items-center justify-center">Code</a>
+            </div>
+        </div>
+
       </div>
     </div>
   ),
