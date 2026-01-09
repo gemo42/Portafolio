@@ -2,7 +2,6 @@ import { useCallback } from 'react';
 
 const useSound = () => {
   const playBeep = useCallback((freq = 600, type = 'square', duration = 0.1) => {
-    // Creamos el contexto de audio de forma segura
     const AudioContext = window.AudioContext || window.webkitAudioContext;
     if (!AudioContext) return;
     

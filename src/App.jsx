@@ -17,7 +17,6 @@ import {
 } from 'react-icons/fi';
 import { SiSteam, SiEpicgames, SiDiscord, SiOpera } from 'react-icons/si';
 
-// --- COMPONENTE BARRA DE TAREAS ORGANIZADA ---
 const Taskbar = ({ openWindow }) => {
   return (
     <div className="fixed bottom-0 left-0 w-full h-12 bg-black/90 backdrop-blur-xl border-t border-hack-green/20 z-[1000] flex items-center justify-between px-4 select-none pointer-events-auto">

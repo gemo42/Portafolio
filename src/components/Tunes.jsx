@@ -1,15 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
 import { FiMusic, FiPlay, FiPause, FiVolume2, FiVolumeX } from 'react-icons/fi';
 
-// Recibimos volume y setVolume como props desde App.jsx
 const Tunes = ({ volume, setVolume }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
 
-  // URL del audio (Lofi Study)
   const audioSrc = "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3";
 
-  // Sincroniza el volumen del elemento <audio> cada vez que cambie la prop
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = volume;
