@@ -17,13 +17,43 @@ import {
 } from 'react-icons/fi';
 import { SiSteam, SiEpicgames, SiDiscord, SiOpera } from 'react-icons/si';
 
+
+const ThemeBtn = ({ name, color, active, onClick }) => (
+    <button onClick={onClick} className={`flex items-center gap-2 p-2 border-2 ${active ? 'border-hack-green bg-hack-green/20 shadow-[0_0_10px_rgba(0,255,0,0.3)]' : 'border-hack-green/30 hover:bg-hack-green/10'} transition-all text-xs font-black text-white cursor-pointer uppercase font-mono`}>
+        <div className={`w-3 h-3 rounded-full ${color} shadow-[0_0_5px_currentColor]`}></div>
+        {name}
+    </button>
+);
+
+const DesktopIcon = ({ icon, label, onClick, onHover }) => {
+    const safeHover = () => { try { onHover(); } catch (e) {} };
+    return (
+        <div onClick={onClick} onMouseEnter={safeHover} className="group flex flex-col items-center gap-1 md:gap-2 w-20 md:w-24 cursor-pointer text-hack-green/70 hover:text-hack-green transition-all hover:scale-105 active:scale-95 uppercase font-black tracking-tighter">
+            <div className="p-3 md:p-4 border-2 border-transparent group-hover:border-hack-green/40 rounded-sm bg-hack-darker/50 shadow-[0_10px_20px_rgba(0,0,0,0.5)] group-hover:shadow-[0_0_20px_rgba(0,255,0,0.2)] transition-all text-hack-green font-black">
+                {icon}
+            </div>
+            <span className="text-[10px] md:text-xs text-center bg-hack-darker/80 px-2 py-1 rounded-sm border border-transparent group-hover:border-hack-green/30 text-hack-light group-hover:text-hack-green font-black shadow-lg uppercase">{label}</span>
+        </div>
+    )
+}
+
+const TaskIcon = ({ icon, label, onClick, color }) => (
+  <button onClick={onClick} className={`p-2 transition-all duration-300 transform hover:-translate-y-1 ${color} text-white/40 relative group cursor-pointer shrink-0`}>
+    {icon}
+    {/* Tooltip solo visible en hover (desktop) */}
+    <span className="hidden md:block absolute -top-10 left-1/2 -translate-x-1/2 bg-hack-darker border border-hack-green/30 px-2 py-1 text-[9px] text-hack-green rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-xl font-bold uppercase font-mono">
+      {label}
+    </span>
+  </button>
+);
+
 const Taskbar = ({ openWindow }) => {
   return (
-    <div className="fixed bottom-0 left-0 w-full h-12 bg-black/90 backdrop-blur-xl border-t border-hack-green/20 z-[1000] flex items-center justify-between px-4 select-none pointer-events-auto">
+    <div className="fixed bottom-0 left-0 w-full h-14 md:h-12 bg-black/90 backdrop-blur-xl border-t border-hack-green/20 z-[1000] flex items-center justify-between px-2 md:px-4 select-none pointer-events-auto">
       
       {/* SECCIÓN IZQUIERDA: SISTEMA */}
-      <div className="flex items-center gap-1">
-        <button className="p-2 hover:bg-hack-green/20 text-hack-green transition-all rounded-md group cursor-pointer mr-2">
+      <div className="flex items-center gap-1 shrink-0">
+        <button className="p-2 hover:bg-hack-green/20 text-hack-green transition-all rounded-md group cursor-pointer mr-1 md:mr-2">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:rotate-180 transition-transform duration-500">
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
           </svg>
@@ -32,19 +62,22 @@ const Taskbar = ({ openWindow }) => {
         <TaskIcon icon={<FiSettings size={18} />} label="SETTINGS" onClick={() => openWindow('settings')} color="hover:text-hack-green" />
       </div>
 
-      {/* SECCIÓN CENTRAL: APPS CENTRADAS */}
-      <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-1 md:gap-4">
+      {/* SECCIÓN CENTRAL: APPS (Scrollbar OCULTO VISUALMENTE) */}
+      <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center w-auto max-w-[60%] md:max-w-none overflow-x-auto gap-2 md:gap-4 px-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         <TaskIcon icon={<FiFolder size={20} />} label="FILES" onClick={() => openWindow('projects')} color="hover:text-yellow-400" />
         <TaskIcon icon={<FiCode size={20} />} label="VS_CODE" color="hover:text-blue-400" />
         <TaskIcon icon={<FiGithub size={20} />} label="GITHUB" onClick={() => openWindow('github')} color="hover:text-white" />
         <TaskIcon icon={<SiDiscord size={20} />} label="DISCORD" onClick={() => openWindow('discord')} color="hover:text-[#5865F2]" />
-        <TaskIcon icon={<SiEpicgames size={18} />} label="EPIC_GAMES" color="hover:text-white" />
-        <TaskIcon icon={<SiSteam size={20} />} label="STEAM" color="hover:text-blue-500" />
-        <TaskIcon icon={<SiOpera size={18} />} label="OPERA_GX" color="hover:text-red-500" />
+        
+        <div className="hidden sm:flex gap-2 md:gap-4">
+            <TaskIcon icon={<SiEpicgames size={18} />} label="EPIC_GAMES" color="hover:text-white" />
+            <TaskIcon icon={<SiSteam size={20} />} label="STEAM" color="hover:text-blue-500" />
+            <TaskIcon icon={<SiOpera size={18} />} label="OPERA_GX" color="hover:text-red-500" />
+        </div>
       </div>
 
       {/* SECCIÓN DERECHA */}
-      <div className="flex items-center gap-4 text-hack-green/60 font-mono text-[10px] font-bold">
+      <div className="flex items-center gap-2 md:gap-4 text-hack-green/60 font-mono text-[10px] font-bold shrink-0">
         <span className="hidden xl:block tracking-widest opacity-40 uppercase">Richard_Kernel_v1.0</span>
         <div className="h-6 w-[1px] bg-white/10 mx-2 hidden lg:block" />
         <Clock />
@@ -52,15 +85,6 @@ const Taskbar = ({ openWindow }) => {
     </div>
   );
 };
-
-const TaskIcon = ({ icon, label, onClick, color }) => (
-  <button onClick={onClick} className={`p-2 transition-all duration-300 transform hover:-translate-y-1 ${color} text-white/40 relative group cursor-pointer`}>
-    {icon}
-    <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-hack-darker border border-hack-green/30 px-2 py-1 text-[9px] text-hack-green rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-xl font-bold uppercase font-mono">
-      {label}
-    </span>
-  </button>
-);
 
 const SystemStats = () => {
   const [stats, setStats] = useState({ cpu: 12, ram: 4.2 });
@@ -75,7 +99,7 @@ const SystemStats = () => {
   }, []);
 
   return (
-    <div className="fixed top-12 left-1/2 -translate-x-1/2 flex gap-12 font-mono text-[16px] text-white/60 z-[1] select-none uppercase tracking-[0.4em] font-black drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] pointer-events-none">
+    <div className="hidden md:flex fixed top-12 left-1/2 -translate-x-1/2 gap-12 font-mono text-[16px] text-white/60 z-[1] select-none uppercase tracking-[0.4em] font-black drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] pointer-events-none">
       <span>CPU_SYS: {stats.cpu}%</span>
       <span>RAM_LOAD: {stats.ram}GB</span>
     </div>
@@ -84,11 +108,11 @@ const SystemStats = () => {
 
 const CONTENT = {
   projects: (
-    <div className="font-mono text-sm uppercase p-2">
+    <div className="font-mono text-sm uppercase p-2 pb-24 md:pb-2">
       <p className="text-hack-light mb-4 animate-pulse lowercase tracking-tighter font-bold"> accessing encrypted archives...</p>
       <div className="grid grid-cols-1 gap-4">
         
-        {/* PROYECTO 1: MC TOOLS */}
+        {/* MC TOOLS */}
         <div className="border-2 border-hack-green bg-hack-darker/50 p-4 relative group hover:shadow-[0_0_15px_rgba(0,255,0,0.3)] transition-all font-bold">
             <div className="absolute top-0 right-0 bg-hack-green text-black text-[10px] font-black px-2 py-0.5 uppercase tracking-widest">Public_Release</div>
             <h3 className="font-black text-lg mb-1 flex items-center gap-2 text-hack-green uppercase tracking-wider"><FiFolder /> MC_TOOLS_WEB</h3>
@@ -104,7 +128,7 @@ const CONTENT = {
             </div>
         </div>
 
-        {/* PROYECTO 2: TATTOO STUDIO */}
+        {/* TATTOO STUDIO */}
         <div className="border-2 border-hack-green bg-hack-darker/50 p-4 relative group hover:shadow-[0_0_15px_rgba(0,255,0,0.3)] transition-all font-bold">
             <div className="absolute top-0 right-0 bg-hack-green text-black text-[10px] font-black px-2 py-0.5 uppercase tracking-widest">Design</div>
             <h3 className="font-black text-lg mb-1 flex items-center gap-2 text-hack-green uppercase tracking-wider"><FiFolder /> TATTOO_STUDIO</h3>
@@ -120,7 +144,7 @@ const CONTENT = {
             </div>
         </div>
 
-        {/* PROYECTO 3: VALFIT GYM */}
+        {/* VALFIT GYM */}
         <div className="border-2 border-hack-green bg-hack-darker/50 p-4 relative group hover:shadow-[0_0_15px_rgba(0,255,0,0.3)] transition-all font-bold">
             <div className="absolute top-0 right-0 bg-hack-green text-black text-[10px] font-black px-2 py-0.5 uppercase tracking-widest">UI/UX</div>
             <h3 className="font-black text-lg mb-1 flex items-center gap-2 text-hack-green uppercase tracking-wider"><FiFolder /> VALFIT_GYM</h3>
@@ -140,13 +164,13 @@ const CONTENT = {
     </div>
   ),
   about: (
-    <div className="font-mono uppercase font-black p-4">
-        <div className="flex gap-4 mb-4">
-            <div className="w-20 h-20 md:w-24 md:h-24 border-2 border-hack-green flex items-center justify-center bg-hack-green/20 relative overflow-hidden shrink-0">
+    <div className="font-mono uppercase font-black p-4 pb-24 md:pb-4">
+        <div className="flex flex-col md:flex-row gap-4 mb-4">
+            <div className="w-20 h-20 md:w-24 md:h-24 border-2 border-hack-green flex items-center justify-center bg-hack-green/20 relative overflow-hidden shrink-0 mx-auto md:mx-0">
                 <span className="text-4xl md:text-5xl font-black relative z-10 text-hack-green uppercase">R</span>
                 <div className="absolute inset-0 bg-hack-green/20 h-[10%] w-full animate-[spin_2s_linear_infinite]"></div>
             </div>
-            <div>
+            <div className="text-center md:text-left">
               <p className="text-lg md:text-xl font-black neon-glow text-hack-green uppercase">Richard Hernández</p>
               <p className="text-xs md:text-sm text-hack-light font-bold">Ingeniero Informático // Chile</p>
               <p className="text-[10px] md:text-xs mt-2 bg-hack-green text-black inline-block px-1 font-black tracking-[0.2em]">STATUS: ONLINE</p>
@@ -159,7 +183,7 @@ const CONTENT = {
     </div>
   ),
   skills: (
-    <div className="text-sm text-hack-green uppercase tracking-tighter font-mono font-black p-4">
+    <div className="text-sm text-hack-green uppercase tracking-tighter font-mono font-black p-4 pb-24 md:pb-4">
         <p className="text-hack-light mb-4 lowercase opacity-50 font-bold font-mono"> running system_diagnostics...</p>
         <h3 className="border-b-2 border-hack-green mb-3 font-black bg-hack-green/10 px-1 uppercase tracking-widest text-lg">Core_Modules</h3>
         <SkillBar name="REACT.JS / NEXT.JS" level={90} />
@@ -322,7 +346,7 @@ function App() {
         </div>
       ),
       contact: (
-        <div className="font-mono uppercase font-black text-hack-green p-4">
+        <div className="font-mono uppercase font-black text-hack-green p-4 pb-24 md:pb-4">
           <p className="mb-4 text-hack-light lowercase opacity-50 tracking-tighter font-bold"> initiating handshake protocol...</p>
           <div className="space-y-4 text-white">
               <div onClick={() => copyToClipboard("richard.hernandez42q@gmail.com")} className="flex items-center justify-between border-2 border-hack-green p-3 hover:bg-hack-green hover:text-black transition-all group cursor-pointer shadow-lg bg-black/40 font-black">
@@ -347,7 +371,7 @@ function App() {
         </div>
       ),
       settings: (
-        <div className="space-y-6 uppercase font-mono font-black p-4">
+        <div className="space-y-6 uppercase font-mono font-black p-4 pb-24 md:pb-4">
             <div>
                 <h3 className="text-hack-green border-b-2 border-hack-green mb-4 pb-1 flex items-center gap-2 uppercase tracking-widest text-lg font-black"><FiMonitor /> THEME_SELECT</h3>
                 <div className="grid grid-cols-2 gap-3">
@@ -376,7 +400,7 @@ function App() {
               <p>STATUS: ONLINE</p>
             </div>
           </div>
-          <div className="flex-1 overflow-y-auto p-6 space-y-10 custom-scrollbar">
+          <div className="flex-1 overflow-y-auto p-6 space-y-10 custom-scrollbar pb-24 md:pb-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 font-black">
               <div className="space-y-6 font-mono">
                 <h2 className="text-lg tracking-[0.2em] bg-hack-green/10 px-2 w-fit border-l-4 border-hack-green uppercase font-black">Work_History</h2>
@@ -476,11 +500,14 @@ function App() {
             <MusicWidget volume={volume} setVolume={setVolume} isPlaying={isPlaying} togglePlay={togglePlay} />
             <Taskbar openWindow={openWindow} />
 
-            <div className="absolute top-16 left-4 md:top-20 md:left-6 flex flex-col gap-6 md:gap-8 z-10 select-none pb-20 font-black">
-                <DesktopIcon icon={<FiFolder className="text-2xl md:text-4xl" />} label="PROJECTS" onClick={() => openWindow('projects')} onHover={playHover} />
-                <DesktopIcon icon={<FiTerminal className="text-2xl md:text-4xl" />} label="WHOAMI" onClick={() => openWindow('about')} onHover={playHover} />
-                <DesktopIcon icon={<FiCpu className="text-2xl md:text-4xl" />} label="SKILLS" onClick={() => openWindow('skills')} onHover={playHover} />
-                <DesktopIcon icon={<FiMail className="text-2xl md:text-4xl" />} label="CONTACT" onClick={() => openWindow('contact')} onHover={playHover} />
+            <div className="absolute top-16 left-4 md:top-20 md:left-6 flex flex-col md:gap-8 z-10 select-none pb-20 font-black">
+                {/* En móvil usamos Grid, en Desktop Flex */}
+                <div className="grid grid-cols-2 gap-4 md:flex md:flex-col md:gap-8">
+                    <DesktopIcon icon={<FiFolder className="text-3xl md:text-4xl" />} label="PROJECTS" onClick={() => openWindow('projects')} onHover={playHover} />
+                    <DesktopIcon icon={<FiTerminal className="text-3xl md:text-4xl" />} label="WHOAMI" onClick={() => openWindow('about')} onHover={playHover} />
+                    <DesktopIcon icon={<FiCpu className="text-3xl md:text-4xl" />} label="SKILLS" onClick={() => openWindow('skills')} onHover={playHover} />
+                    <DesktopIcon icon={<FiMail className="text-3xl md:text-4xl" />} label="CONTACT" onClick={() => openWindow('contact')} onHover={playHover} />
+                </div>
             </div>
 
             <div className="absolute top-20 right-6 md:right-10 flex flex-col gap-8 z-10 select-none font-black">
@@ -507,25 +534,6 @@ function App() {
         )}
     </div>
   );
-}
-
-const ThemeBtn = ({ name, color, active, onClick }) => (
-    <button onClick={onClick} className={`flex items-center gap-2 p-2 border-2 ${active ? 'border-hack-green bg-hack-green/20 shadow-[0_0_10px_rgba(0,255,0,0.3)]' : 'border-hack-green/30 hover:bg-hack-green/10'} transition-all text-xs font-black text-white cursor-pointer uppercase font-mono`}>
-        <div className={`w-3 h-3 rounded-full ${color} shadow-[0_0_5px_currentColor]`}></div>
-        {name}
-    </button>
-);
-
-function DesktopIcon({ icon, label, onClick, onHover }) {
-    const safeHover = () => { try { onHover(); } catch (e) {} };
-    return (
-        <div onClick={onClick} onMouseEnter={safeHover} className="group flex flex-col items-center gap-1 md:gap-2 w-16 md:w-24 cursor-pointer text-hack-green/70 hover:text-hack-green transition-all hover:scale-105 active:scale-95 uppercase font-black tracking-tighter">
-            <div className="p-3 md:p-4 border-2 border-transparent group-hover:border-hack-green/40 rounded-sm bg-hack-darker/50 shadow-[0_10px_20px_rgba(0,0,0,0.5)] group-hover:shadow-[0_0_20px_rgba(0,255,0,0.2)] transition-all text-hack-green font-black">
-                {icon}
-            </div>
-            <span className="text-[10px] md:text-xs text-center bg-hack-darker/80 px-2 py-1 rounded-sm border border-transparent group-hover:border-hack-green/30 text-hack-light group-hover:text-hack-green font-black shadow-lg uppercase">{label}</span>
-        </div>
-    )
 }
 
 export default App;
