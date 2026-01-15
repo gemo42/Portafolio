@@ -112,19 +112,19 @@ const CONTENT = {
       <p className="text-hack-light mb-4 animate-pulse lowercase tracking-tighter font-bold"> accessing encrypted archives...</p>
       <div className="grid grid-cols-1 gap-4">
         
-        {/* MC TOOLS */}
+        {/* IZZI-SUSHI */}
         <div className="border-2 border-hack-green bg-hack-darker/50 p-4 relative group hover:shadow-[0_0_15px_rgba(0,255,0,0.3)] transition-all font-bold">
             <div className="absolute top-0 right-0 bg-hack-green text-black text-[10px] font-black px-2 py-0.5 uppercase tracking-widest">Public_Release</div>
-            <h3 className="font-black text-lg mb-1 flex items-center gap-2 text-hack-green uppercase tracking-wider"><FiFolder /> MC_TOOLS_WEB</h3>
+            <h3 className="font-black text-lg mb-1 flex items-center gap-2 text-hack-green uppercase tracking-wider"><FiFolder /> Izzi-sushi</h3>
             <div className="h-[1px] w-full bg-hack-green/30 my-2"></div>
-            <p className="text-xs text-hack-light mb-3 lowercase font-mono">Aplicación web para visualizar skins de Minecraft en 3D real usando WebGL.</p>
+            <p className="text-xs text-hack-light mb-3 lowercase font-mono">Mejora Web para la pagina de Izzi-sushi.</p>
             <div className="flex gap-2 text-[10px] tracking-wider mb-4 text-white font-black">
                 <span className="bg-hack-green/20 px-2 border border-hack-green/50">REACT</span>
-                <span className="bg-hack-green/20 px-2 border border-hack-green/50">THREE.JS</span>
+                <span className="bg-hack-green/20 px-2 border border-hack-green/50">TAILWIND</span>
             </div>
             <div className="flex gap-2">
-                <a href="https://more-tools.vercel.app" target="_blank" rel="noreferrer" className="flex-1 border-2 border-hack-green hover:bg-hack-green hover:text-black py-1 text-xs font-black transition-colors text-white cursor-pointer uppercase flex items-center justify-center">Demo</a>
-                <a href="https://github.com/gemo42/MoreTools.git" target="_blank" rel="noreferrer" className="flex-1 border-2 border-hack-green hover:bg-hack-green hover:text-black py-1 text-xs font-black transition-colors text-white cursor-pointer uppercase flex items-center justify-center">Code</a>
+                <a href="https://izisushi-odh0t62s0-gemo42s-projects.vercel.app" target="_blank" rel="noreferrer" className="flex-1 border-2 border-hack-green hover:bg-hack-green hover:text-black py-1 text-xs font-black transition-colors text-white cursor-pointer uppercase flex items-center justify-center">Demo</a>
+                <a href="https://github.com/gemo42/izisushi-app.git" target="_blank" rel="noreferrer" className="flex-1 border-2 border-hack-green hover:bg-hack-green hover:text-black py-1 text-xs font-black transition-colors text-white cursor-pointer uppercase flex items-center justify-center">Code</a>
             </div>
         </div>
 
