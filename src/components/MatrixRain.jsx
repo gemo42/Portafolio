@@ -1,3 +1,4 @@
+// src/components/MatrixRain.jsx
 import { useEffect, useRef } from 'react';
 
 const MatrixRain = ({ theme }) => {
@@ -62,7 +63,7 @@ const MatrixRain = ({ theme }) => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 w-full h-full -z-10 bg-black"
+      className="fixed inset-0 w-full h-full -z-10 pointer-events-none opacity-20"
     />
   );
 };

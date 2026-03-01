@@ -1,3 +1,4 @@
+// src/App.jsx
 import { useState, useEffect, useRef } from 'react';
 import OSWindow from './components/OSWindow';
 import BootSequence from './components/BootSequence';
@@ -113,7 +114,7 @@ const CONTENT = {
       <div className="grid grid-cols-1 gap-4">
         
         {/* IZZI-SUSHI */}
-        <div className="border-2 border-hack-green bg-hack-darker/50 p-4 relative group hover:shadow-[0_0_15px_rgba(0,255,0,0.3)] transition-all font-bold">
+        <div className="border-2 border-hack-green bg-black/70 backdrop-blur-sm p-4 relative group hover:shadow-[0_0_15px_rgba(0,255,0,0.3)] transition-all font-bold">
             <div className="absolute top-0 right-0 bg-hack-green text-black text-[10px] font-black px-2 py-0.5 uppercase tracking-widest">Public_Release</div>
             <h3 className="font-black text-lg mb-1 flex items-center gap-2 text-hack-green uppercase tracking-wider"><FiFolder /> Izzi-sushi</h3>
             <div className="h-[1px] w-full bg-hack-green/30 my-2"></div>
@@ -129,7 +130,7 @@ const CONTENT = {
         </div>
 
         {/* TATTOO STUDIO */}
-        <div className="border-2 border-hack-green bg-hack-darker/50 p-4 relative group hover:shadow-[0_0_15px_rgba(0,255,0,0.3)] transition-all font-bold">
+        <div className="border-2 border-hack-green bg-black/70 backdrop-blur-sm p-4 relative group hover:shadow-[0_0_15px_rgba(0,255,0,0.3)] transition-all font-bold">
             <div className="absolute top-0 right-0 bg-hack-green text-black text-[10px] font-black px-2 py-0.5 uppercase tracking-widest">Design</div>
             <h3 className="font-black text-lg mb-1 flex items-center gap-2 text-hack-green uppercase tracking-wider"><FiFolder /> TATTOO_STUDIO</h3>
             <div className="h-[1px] w-full bg-hack-green/30 my-2"></div>
@@ -145,7 +146,7 @@ const CONTENT = {
         </div>
 
         {/* VALFIT GYM */}
-        <div className="border-2 border-hack-green bg-hack-darker/50 p-4 relative group hover:shadow-[0_0_15px_rgba(0,255,0,0.3)] transition-all font-bold">
+        <div className="border-2 border-hack-green bg-black/70 backdrop-blur-sm p-4 relative group hover:shadow-[0_0_15px_rgba(0,255,0,0.3)] transition-all font-bold">
             <div className="absolute top-0 right-0 bg-hack-green text-black text-[10px] font-black px-2 py-0.5 uppercase tracking-widest">UI/UX</div>
             <h3 className="font-black text-lg mb-1 flex items-center gap-2 text-hack-green uppercase tracking-wider"><FiFolder /> VALFIT_GYM</h3>
             <div className="h-[1px] w-full bg-hack-green/30 my-2"></div>

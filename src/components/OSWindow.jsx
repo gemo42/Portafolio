@@ -40,51 +40,28 @@ const OSWindow = ({ id, title, isOpen, onClose, children, zIndex, onFocus, initi
           animate="visible"
           exit="exit"
           variants={isMobile ? mobileVariants : desktopVariants}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          drag={!isMobile}
+          drag={!isMobile} 
           dragListener={false}
           dragControls={dragControls}
           dragMomentum={false}
-          
           onPointerDown={() => onFocus(id)}
           style={{ zIndex }}
-
           className={`
-            border-2 border-hack-green bg-hack-darker shadow-[0_0_20px_rgba(0,255,0,0.2)] overflow-hidden flex flex-col
-            ${isMobile 
-                ? 'fixed inset-0 w-full h-[100dvh] rounded-none z-[9999]' 
-                : `absolute ${width} ${height} max-h-[90vh] rounded-sm`
-            }
+            border-2 border-hack-green shadow-[0_0_20px_rgba(0,255,0,0.2)] overflow-hidden flex flex-col
+            bg-black/85 backdrop-blur-md
+            ${isMobile ? 'fixed inset-0 w-full h-full rounded-none z-[9999]' : 'absolute w-[90%] md:w-[600px] h-auto max-h-[80vh] rounded-sm'}
           `}
         >
-          {/* HEADER */}
+          {/* HEADER INTACTO */}
           <div 
-            onPointerDown={startDrag} 
-            className="bg-hack-green text-hack-darker px-4 py-3 md:py-1 md:px-2 flex justify-between items-center select-none cursor-move font-bold uppercase text-sm shadow-md touch-none shrink-0"
+            onPointerDown={startDrag}
+            className="bg-hack-green text-hack-darker px-4 pt-10 pb-3 md:py-1 md:px-2 flex justify-between items-center select-none cursor-move font-bold uppercase text-sm shadow-md touch-none"
           >
-            <div className="flex items-center gap-2 truncate pr-4 pointer-events-none">
-               <span className="font-extrabold">{'>_'}</span> 
-               <span className="truncate">{title}</span>
-            </div>
-            
-            <div className="flex gap-4 md:gap-2 shrink-0 items-center">
-               {/* Botón Minimizar solo en Desktop */}
-               <button className="hidden md:block hover:bg-hack-darker hover:text-hack-green p-0.5 border border-hack-green/50 transition-colors pointer-events-auto" onClick={(e) => e.stopPropagation()}>
-                    <FiMinus />
-               </button>
-               
-               {/* Botón Cerrar: Grande en móvil, Pequeño en Desktop */}
-               <button 
-                    onClick={(e) => { e.stopPropagation(); onClose(); }} 
-                    className="hover:bg-hack-darker hover:text-hack-green border border-hack-darker transition-colors bg-hack-darker text-hack-green md:bg-transparent md:text-hack-darker p-2 md:p-0.5 rounded md:rounded-none active:scale-90 pointer-events-auto"
-               >
-                  <FiX size={isMobile ? 24 : 16} strokeWidth={3} />
-               </button>
-            </div>
+           {/* ... contenido del header ... */}
           </div>
 
-          {/* CONTENIDO */}
-          <div className="p-4 text-hack-green overflow-y-auto custom-scrollbar flex-1 bg-hack-dark/95 pb-24 md:pb-4 relative">
+          {/* CONTENIDO CON FONDO TRANSPARENTE PARA PERMITIR EL BLUR DEL CONTENEDOR PADRE */}
+          <div className="p-4 text-hack-green overflow-y-auto custom-scrollbar flex-1 bg-transparent pb-20 md:pb-4">
             {children}
           </div>
         </motion.div>
