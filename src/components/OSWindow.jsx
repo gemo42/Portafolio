@@ -1,16 +1,8 @@
 import { motion, AnimatePresence, useDragControls } from 'framer-motion';
-import { FiX, FiMinus } from 'react-icons/fi';
-import { useState, useEffect } from 'react';
+import { FiX, FiMinus, FiMaximize2 } from 'react-icons/fi';
 
-const OSWindow = ({ id, title, isOpen, onClose, children, zIndex, onFocus, initialPosition, width = "md:w-[600px]", height = "h-auto" }) => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
+const OSWindow = ({ id, title, isOpen, onClose, children, zIndex, onFocus, initialPosition, width, height }) => {
+  const isMobile = window.innerWidth < 768;
   const dragControls = useDragControls();
 
   const desktopVariants = {
@@ -20,9 +12,9 @@ const OSWindow = ({ id, title, isOpen, onClose, children, zIndex, onFocus, initi
   };
 
   const mobileVariants = {
-    hidden: { y: '100%', opacity: 0 },
-    visible: { y: 0, opacity: 1 },
-    exit: { y: '100%', opacity: 0 }
+    hidden: { opacity: 0, y: 100 },
+    visible: { opacity: 1, y: 0, x: 0, top: 0, left: 0, right: 0, bottom: 0 },
+    exit: { opacity: 0, y: 100 }
   };
 
   const startDrag = (event) => {
@@ -32,6 +24,9 @@ const OSWindow = ({ id, title, isOpen, onClose, children, zIndex, onFocus, initi
     }
   };
 
+  const desktopWidth = width || 'md:w-[600px]';
+  const desktopHeight = height || 'max-h-[80vh]';
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -40,7 +35,7 @@ const OSWindow = ({ id, title, isOpen, onClose, children, zIndex, onFocus, initi
           animate="visible"
           exit="exit"
           variants={isMobile ? mobileVariants : desktopVariants}
-          drag={!isMobile} 
+          drag={!isMobile}
           dragListener={false}
           dragControls={dragControls}
           dragMomentum={false}
@@ -49,18 +44,41 @@ const OSWindow = ({ id, title, isOpen, onClose, children, zIndex, onFocus, initi
           className={`
             border-2 border-hack-green shadow-[0_0_20px_rgba(0,255,0,0.2)] overflow-hidden flex flex-col
             bg-black/85 backdrop-blur-md
-            ${isMobile ? 'fixed inset-0 w-full h-full rounded-none z-[9999]' : 'absolute w-[90%] md:w-[600px] h-auto max-h-[80vh] rounded-sm'}
+            ${isMobile ? 'fixed inset-0 w-full h-full rounded-none z-[9999]' : `absolute w-[90%] ${desktopWidth} ${desktopHeight} rounded-sm`}
           `}
         >
-          {/* HEADER INTACTO */}
-          <div 
+          <div
             onPointerDown={startDrag}
             className="bg-hack-green text-hack-darker px-4 pt-10 pb-3 md:py-1 md:px-2 flex justify-between items-center select-none cursor-move font-bold uppercase text-sm shadow-md touch-none"
           >
-           {/* ... contenido del header ... */}
+            <div className="flex items-center gap-2 truncate pr-4 pointer-events-none">
+               <span className="font-extrabold">{'>_'}</span>
+               <span className="truncate">{title}</span>
+            </div>
+
+            <div className="flex gap-4 md:gap-2 shrink-0">
+               <button className="hidden md:block hover:bg-hack-darker hover:text-hack-green p-0.5 border border-hack-darker transition-colors pointer-events-auto" onClick={(e) => e.stopPropagation()}>
+                  <FiMinus />
+               </button>
+               
+               {isMobile && (
+                 <button className="md:hidden opacity-50 pointer-events-auto">
+                    <FiMaximize2 size={18} />
+                 </button>
+               )}
+
+               <button
+                  onClick={(e) => {
+                      e.stopPropagation();
+                      onClose();
+                  }}
+                  className="hover:bg-hack-darker hover:text-hack-green border border-hack-darker transition-colors bg-hack-darker text-hack-green md:bg-transparent md:text-hack-darker p-2 md:p-0.5 rounded md:rounded-none active:scale-90 pointer-events-auto"
+               >
+                  <FiX size={isMobile ? 24 : 16} strokeWidth={3} />
+               </button>
+            </div>
           </div>
 
-          {/* CONTENIDO CON FONDO TRANSPARENTE PARA PERMITIR EL BLUR DEL CONTENEDOR PADRE */}
           <div className="p-4 text-hack-green overflow-y-auto custom-scrollbar flex-1 bg-transparent pb-20 md:pb-4">
             {children}
           </div>
