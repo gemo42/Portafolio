@@ -1,5 +1,6 @@
 // src/App.jsx
 import { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import OSWindow from './components/OSWindow';
 import BootSequence from './components/BootSequence';
 import Clock from './components/Clock';
@@ -18,7 +19,6 @@ import {
 } from 'react-icons/fi';
 import { SiSteam, SiEpicgames, SiDiscord, SiOpera } from 'react-icons/si';
 
-
 const ThemeBtn = ({ name, color, active, onClick }) => (
     <button onClick={onClick} className={`flex items-center gap-2 p-2 border-2 ${active ? 'border-hack-green bg-hack-green/20 shadow-[0_0_10px_rgba(0,255,0,0.3)]' : 'border-hack-green/30 hover:bg-hack-green/10'} transition-all text-xs font-black text-white cursor-pointer uppercase font-mono`}>
         <div className={`w-3 h-3 rounded-full ${color} shadow-[0_0_5px_currentColor]`}></div>
@@ -27,14 +27,33 @@ const ThemeBtn = ({ name, color, active, onClick }) => (
 );
 
 const DesktopIcon = ({ icon, label, onClick, onHover }) => {
+    const isDragging = useRef(false);
     const safeHover = () => { try { onHover(); } catch (e) {} };
+    
     return (
-        <div onClick={onClick} onMouseEnter={safeHover} className="group flex flex-col items-center gap-1 md:gap-2 w-20 md:w-24 cursor-pointer text-hack-green/70 hover:text-hack-green transition-all hover:scale-105 active:scale-95 uppercase font-black tracking-tighter">
-            <div className="p-3 md:p-4 border-2 border-transparent group-hover:border-hack-green/40 rounded-sm bg-hack-darker/50 shadow-[0_10px_20px_rgba(0,0,0,0.5)] group-hover:shadow-[0_0_20px_rgba(0,255,0,0.2)] transition-all text-hack-green font-black">
+        <motion.div 
+          drag 
+          dragMomentum={false}
+          onDragStart={() => { isDragging.current = true; }}
+          onDragEnd={() => { setTimeout(() => { isDragging.current = false; }, 150); }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={(e) => {
+              if (isDragging.current) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  return;
+              }
+              onClick();
+          }} 
+          onMouseEnter={safeHover} 
+          className="group flex flex-col items-center gap-1 md:gap-2 w-20 md:w-24 cursor-pointer text-hack-green/70 hover:text-hack-green uppercase font-black tracking-tighter relative z-10"
+        >
+            <div className="p-3 md:p-4 border-2 border-transparent group-hover:border-hack-green/40 rounded-sm bg-hack-darker/50 shadow-[0_10px_20px_rgba(0,0,0,0.5)] group-hover:shadow-[0_0_20px_rgba(0,255,0,0.2)] transition-colors text-hack-green font-black">
                 {icon}
             </div>
             <span className="text-[10px] md:text-xs text-center bg-hack-darker/80 px-2 py-1 rounded-sm border border-transparent group-hover:border-hack-green/30 text-hack-light group-hover:text-hack-green font-black shadow-lg uppercase">{label}</span>
-        </div>
+        </motion.div>
     )
 }
 
@@ -292,59 +311,65 @@ function App() {
           <p className="text-hack-light mb-4 animate-pulse lowercase tracking-tighter font-bold"> fetching commercial_directives...</p>
           <div className="space-y-8">
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                 <div className="border-2 border-hack-green bg-black/70 backdrop-blur-sm p-4 relative group transition-all font-bold">
-                    [cite_start]<div className="absolute top-0 right-0 bg-hack-green text-black text-[10px] font-black px-2 py-0.5">$450.000 CLP [cite: 17, 22]</div>
+                 <div className="border-2 border-hack-green bg-black/70 backdrop-blur-sm p-4 relative group transition-all font-bold flex flex-col">
                     <h3 className="font-black text-lg mb-2 text-hack-green uppercase">ESSENTIAL_PAGE</h3>
                     <div className="h-[1px] w-full bg-hack-green/30 my-2"></div>
-                    <ul className="text-xs text-hack-light space-y-2 lowercase font-mono">
-                       [cite_start]<li>» one-page layout [cite: 19]</li>
-                       [cite_start]<li>» sección de servicios y galería [cite: 19]</li>
-                       [cite_start]<li>» formulario de contacto vinculado [cite: 19]</li>
-                       [cite_start]<li>» entrega: 5-7 días hábiles [cite: 21]</li>
+                    <ul className="text-xs text-hack-light space-y-2 lowercase font-mono flex-1">
+                       <li>» one-page layout</li>
+                       <li>» sección de servicios y galería</li>
+                       <li>» formulario de contacto vinculado</li>
+                       <li>» entrega: 5-7 días hábiles</li>
                     </ul>
+                    <div className="mt-4 border border-hack-green/30 bg-hack-green/10 p-2 text-center text-hack-green font-black text-xs">
+                        PRECIO: $450.000 CLP
+                    </div>
                  </div>
-                 <div className="border-2 border-hack-green bg-black/70 backdrop-blur-sm p-4 relative group transition-all font-bold">
-                    [cite_start]<div className="absolute top-0 right-0 bg-hack-green text-black text-[10px] font-black px-2 py-0.5">$750.000 CLP [cite: 23, 28]</div>
+                 <div className="border-2 border-hack-green bg-black/70 backdrop-blur-sm p-4 relative group transition-all font-bold flex flex-col">
                     <h3 className="font-black text-lg mb-2 text-hack-green uppercase">BUSINESS_PAGE</h3>
                     <div className="h-[1px] w-full bg-hack-green/30 my-2"></div>
-                    <ul className="text-xs text-hack-light space-y-2 lowercase font-mono">
-                       [cite_start]<li>» estructura multi-sección [cite: 25]</li>
-                       [cite_start]<li>» lighthouse score +90 [cite: 25]</li>
-                       [cite_start]<li>» seo de alta fidelidad [cite: 25]</li>
-                       [cite_start]<li>» entrega: 10-15 días hábiles [cite: 27]</li>
+                    <ul className="text-xs text-hack-light space-y-2 lowercase font-mono flex-1">
+                       <li>» estructura multi-sección</li>
+                       <li>» lighthouse score +90</li>
+                       <li>» seo de alta fidelidad</li>
+                       <li>» entrega: 10-15 días hábiles</li>
                     </ul>
+                    <div className="mt-4 border border-hack-green/30 bg-hack-green/10 p-2 text-center text-hack-green font-black text-xs">
+                        PRECIO: $750.000 CLP
+                    </div>
                  </div>
-                 <div className="border-2 border-hack-green bg-black/70 backdrop-blur-sm p-4 relative group transition-all font-bold">
-                    [cite_start]<div className="absolute top-0 right-0 bg-hack-green text-black text-[10px] font-black px-2 py-0.5">DESDE $1.200.000 CLP [cite: 29, 34]</div>
+                 <div className="border-2 border-hack-green bg-black/70 backdrop-blur-sm p-4 relative group transition-all font-bold flex flex-col">
                     <h3 className="font-black text-lg mb-2 text-hack-green uppercase">ENTERPRISE_APP</h3>
                     <div className="h-[1px] w-full bg-hack-green/30 my-2"></div>
-                    <ul className="text-xs text-hack-light space-y-2 lowercase font-mono">
-                       [cite_start]<li>» panel cms administrativo [cite: 31]</li>
-                       [cite_start]<li>» bases de datos [cite: 31]</li>
-                       [cite_start]<li>» integración api externa [cite: 31]</li>
-                       [cite_start]<li>» entrega: desde 21 días hábiles [cite: 33]</li>
+                    <ul className="text-xs text-hack-light space-y-2 lowercase font-mono flex-1">
+                       <li>» panel cms administrativo</li>
+                       <li>» bases de datos</li>
+                       <li>» integración api externa</li>
+                       <li>» entrega: desde 21 días hábiles</li>
                     </ul>
+                    <div className="mt-4 border border-hack-green/30 bg-hack-green/10 p-2 text-center text-hack-green font-black text-xs">
+                        PRECIO: DESDE $1.200.000 CLP
+                    </div>
                  </div>
               </div>
   
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="border-2 border-hack-green/50 bg-black/70 backdrop-blur-sm p-4">
-                      [cite_start]<h3 className="text-hack-green font-black mb-3 border-b border-hack-green/30 pb-1">MODULE_EXTRAS [cite: 45]</h3>
-                      <ul className="text-xs text-white space-y-2 font-black uppercase">
-                          [cite_start]<li className="flex justify-between border-b border-hack-green/10 pb-1"><span>Multidioma (EN/ES)</span><span className="text-hack-green">+$150.000 [cite: 47]</span></li>
-                          [cite_start]<li className="flex justify-between border-b border-hack-green/10 pb-1"><span>Pasarela Webpay/Transbank</span><span className="text-hack-green">+$180.000 [cite: 48]</span></li>
-                          [cite_start]<li className="flex justify-between border-b border-hack-green/10 pb-1"><span>Blog Autogestionable</span><span className="text-hack-green">+$120.000 [cite: 49]</span></li>
-                          [cite_start]<li className="flex justify-between border-b border-hack-green/10 pb-1"><span>Sección adicional</span><span className="text-hack-green">+$80.000 [cite: 50]</span></li>
+                  <div className="border-2 border-hack-green/50 bg-black/70 backdrop-blur-sm p-4 flex flex-col">
+                      <h3 className="text-hack-green font-black mb-3 border-b border-hack-green/30 pb-1">MODULE_EXTRAS</h3>
+                      <ul className="text-xs text-white space-y-2 font-black uppercase flex-1">
+                          <li className="flex justify-between border-b border-hack-green/10 pb-1"><span>Multidioma (EN/ES)</span><span className="text-hack-green">+$150.000</span></li>
+                          <li className="flex justify-between border-b border-hack-green/10 pb-1"><span>Pasarela Webpay/Transbank</span><span className="text-hack-green">+$180.000</span></li>
+                          <li className="flex justify-between border-b border-hack-green/10 pb-1"><span>Blog Autogestionable</span><span className="text-hack-green">+$120.000</span></li>
+                          <li className="flex justify-between border-b border-hack-green/10 pb-1"><span>Sección adicional</span><span className="text-hack-green">+$80.000</span></li>
                       </ul>
                   </div>
-                  <div className="border-2 border-hack-green/50 bg-black/70 backdrop-blur-sm p-4">
-                      [cite_start]<h3 className="text-hack-green font-black mb-3 border-b border-hack-green/30 pb-1">CONTINUIDAD_OPERATIVA [cite: 38]</h3>
-                      [cite_start]<div className="flex justify-between mb-2 text-hack-green font-black"><span>FEE MENSUAL</span><span>$35.000 CLP [cite: 39]</span></div>
-                      <ul className="text-xs text-white/70 space-y-1 lowercase font-mono font-bold">
-                          [cite_start]<li>» alojamiento en red de borde [cite: 41]</li>
-                          [cite_start]<li>» mitigación de ataques ddos [cite: 42]</li>
-                          [cite_start]<li>» mantenimiento preventivo [cite: 43]</li>
-                          [cite_start]<li>» soporte técnico directo [cite: 44]</li>
+                  <div className="border-2 border-hack-green/50 bg-black/70 backdrop-blur-sm p-4 flex flex-col">
+                      <h3 className="text-hack-green font-black mb-3 border-b border-hack-green/30 pb-1">CONTINUIDAD_OPERATIVA</h3>
+                      <div className="flex justify-between mb-2 text-hack-green font-black"><span>FEE MENSUAL</span><span>$35.000 CLP</span></div>
+                      <ul className="text-xs text-white/70 space-y-1 lowercase font-mono font-bold flex-1">
+                          <li>» alojamiento en red de borde</li>
+                          <li>» mitigación de ataques ddos</li>
+                          <li>» mantenimiento preventivo</li>
+                          <li>» soporte técnico directo</li>
                       </ul>
                   </div>
               </div>
@@ -618,10 +643,10 @@ function App() {
             <Taskbar openWindow={openWindow} />
 
             <div className="absolute top-16 left-4 md:top-20 md:left-6 flex flex-col md:gap-8 z-10 select-none pb-20 font-black">
-                <div className="grid grid-cols-2 gap-4 md:flex md:flex-col md:gap-8">
-                    <DesktopIcon icon={<FiFolder className="text-3xl md:text-4xl" />} label="PROJECTS" onClick={() => openWindow('projects')} onHover={playHover} />
+                <div className="grid grid-cols-2 gap-4 md:gap-8">
                     <DesktopIcon icon={<FiBriefcase className="text-3xl md:text-4xl" />} label="CLIENTS" onClick={() => openWindow('clients')} onHover={playHover} />
                     <DesktopIcon icon={<FiDollarSign className="text-3xl md:text-4xl" />} label="PRICING" onClick={() => openWindow('pricing')} onHover={playHover} />
+                    <DesktopIcon icon={<FiFolder className="text-3xl md:text-4xl" />} label="PROJECTS" onClick={() => openWindow('projects')} onHover={playHover} />
                     <DesktopIcon icon={<FiTerminal className="text-3xl md:text-4xl" />} label="WHOAMI" onClick={() => openWindow('about')} onHover={playHover} />
                     <DesktopIcon icon={<FiCpu className="text-3xl md:text-4xl" />} label="SKILLS" onClick={() => openWindow('skills')} onHover={playHover} />
                     <DesktopIcon icon={<FiMail className="text-3xl md:text-4xl" />} label="CONTACT" onClick={() => openWindow('contact')} onHover={playHover} />
@@ -640,7 +665,7 @@ function App() {
                             isOpen={windowsState[id].isOpen} zIndex={windowsState[id].z}
                             initialPosition={windowsState[id].pos}
                             onClose={() => closeWindow(id)} onFocus={focusWindow}
-                            width={id === 'discord' || id === 'github' || id === 'clients' ? 'md:w-[350px]' : (id === 'resume' || id === 'pricing' ? 'md:w-[850px]' : (id === 'terminal' ? 'md:w-[700px]' : 'md:w-[600px]'))}
+                            width={id === 'discord' || id === 'github' ? 'md:w-[350px]' : (id === 'pricing' ? 'md:w-[1100px]' : (id === 'resume' ? 'md:w-[850px]' : (id === 'terminal' ? 'md:w-[700px]' : 'md:w-[600px]')))}
                             height={id === 'discord' || id === 'github' || id === 'clients' ? 'h-auto' : (id === 'resume' || id === 'pricing' ? 'h-[80vh]' : (id === 'terminal' ? 'h-[500px]' : 'h-auto'))}
                         >
                             {dynamicContent[id]}
