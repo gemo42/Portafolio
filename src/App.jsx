@@ -14,7 +14,7 @@ import useSound from './hooks/useSound';
 import { 
   FiFolder, FiTerminal, FiCpu, FiMail, FiGithub, FiLinkedin, 
   FiCommand, FiExternalLink, FiCode, FiSettings, FiMonitor, 
-  FiMusic, FiCopy, FiFileText, FiDownload, FiGrid, FiUserPlus, FiGithub as GithubIcon
+  FiMusic, FiCopy, FiFileText, FiDownload, FiGrid, FiUserPlus, FiGithub as GithubIcon, FiBriefcase, FiDollarSign
 } from 'react-icons/fi';
 import { SiSteam, SiEpicgames, SiDiscord, SiOpera } from 'react-icons/si';
 
@@ -41,7 +41,6 @@ const DesktopIcon = ({ icon, label, onClick, onHover }) => {
 const TaskIcon = ({ icon, label, onClick, color }) => (
   <button onClick={onClick} className={`p-2 transition-all duration-300 transform hover:-translate-y-1 ${color} text-white/40 relative group cursor-pointer shrink-0`}>
     {icon}
-    {/* Tooltip solo visible en hover (desktop) */}
     <span className="hidden md:block absolute -top-10 left-1/2 -translate-x-1/2 bg-hack-darker border border-hack-green/30 px-2 py-1 text-[9px] text-hack-green rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-xl font-bold uppercase font-mono">
       {label}
     </span>
@@ -52,7 +51,6 @@ const Taskbar = ({ openWindow }) => {
   return (
     <div className="fixed bottom-0 left-0 w-full h-14 md:h-12 bg-black/90 backdrop-blur-xl border-t border-hack-green/20 z-[1000] flex items-center justify-between px-2 md:px-4 select-none pointer-events-auto">
       
-      {/* SECCIÓN IZQUIERDA: SISTEMA */}
       <div className="flex items-center gap-1 shrink-0">
         <button className="p-2 hover:bg-hack-green/20 text-hack-green transition-all rounded-md group cursor-pointer mr-1 md:mr-2">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:rotate-180 transition-transform duration-500">
@@ -63,9 +61,10 @@ const Taskbar = ({ openWindow }) => {
         <TaskIcon icon={<FiSettings size={18} />} label="SETTINGS" onClick={() => openWindow('settings')} color="hover:text-hack-green" />
       </div>
 
-      {/* SECCIÓN CENTRAL: APPS (Scrollbar OCULTO VISUALMENTE) */}
       <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center w-auto max-w-[60%] md:max-w-none overflow-x-auto gap-2 md:gap-4 px-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         <TaskIcon icon={<FiFolder size={20} />} label="FILES" onClick={() => openWindow('projects')} color="hover:text-yellow-400" />
+        <TaskIcon icon={<FiBriefcase size={20} />} label="CLIENTS" onClick={() => openWindow('clients')} color="hover:text-green-400" />
+        <TaskIcon icon={<FiDollarSign size={20} />} label="PRICING" onClick={() => openWindow('pricing')} color="hover:text-hack-green" />
         <TaskIcon icon={<FiCode size={20} />} label="VS_CODE" color="hover:text-blue-400" />
         <TaskIcon icon={<FiGithub size={20} />} label="GITHUB" onClick={() => openWindow('github')} color="hover:text-white" />
         <TaskIcon icon={<SiDiscord size={20} />} label="DISCORD" onClick={() => openWindow('discord')} color="hover:text-[#5865F2]" />
@@ -77,7 +76,6 @@ const Taskbar = ({ openWindow }) => {
         </div>
       </div>
 
-      {/* SECCIÓN DERECHA */}
       <div className="flex items-center gap-2 md:gap-4 text-hack-green/60 font-mono text-[10px] font-bold shrink-0">
         <span className="hidden xl:block tracking-widest opacity-40 uppercase">Richard_Kernel_v1.0</span>
         <div className="h-6 w-[1px] bg-white/10 mx-2 hidden lg:block" />
@@ -113,7 +111,6 @@ const CONTENT = {
       <p className="text-hack-light mb-4 animate-pulse lowercase tracking-tighter font-bold"> accessing encrypted archives...</p>
       <div className="grid grid-cols-1 gap-4">
         
-        {/* IZZI-SUSHI */}
         <div className="border-2 border-hack-green bg-black/70 backdrop-blur-sm p-4 relative group hover:shadow-[0_0_15px_rgba(0,255,0,0.3)] transition-all font-bold">
             <div className="absolute top-0 right-0 bg-hack-green text-black text-[10px] font-black px-2 py-0.5 uppercase tracking-widest">Public_Release</div>
             <h3 className="font-black text-lg mb-1 flex items-center gap-2 text-hack-green uppercase tracking-wider"><FiFolder /> Izzi-sushi</h3>
@@ -129,7 +126,6 @@ const CONTENT = {
             </div>
         </div>
 
-        {/* TATTOO STUDIO */}
         <div className="border-2 border-hack-green bg-black/70 backdrop-blur-sm p-4 relative group hover:shadow-[0_0_15px_rgba(0,255,0,0.3)] transition-all font-bold">
             <div className="absolute top-0 right-0 bg-hack-green text-black text-[10px] font-black px-2 py-0.5 uppercase tracking-widest">Design</div>
             <h3 className="font-black text-lg mb-1 flex items-center gap-2 text-hack-green uppercase tracking-wider"><FiFolder /> TATTOO_STUDIO</h3>
@@ -145,7 +141,6 @@ const CONTENT = {
             </div>
         </div>
 
-        {/* VALFIT GYM */}
         <div className="border-2 border-hack-green bg-black/70 backdrop-blur-sm p-4 relative group hover:shadow-[0_0_15px_rgba(0,255,0,0.3)] transition-all font-bold">
             <div className="absolute top-0 right-0 bg-hack-green text-black text-[10px] font-black px-2 py-0.5 uppercase tracking-widest">UI/UX</div>
             <h3 className="font-black text-lg mb-1 flex items-center gap-2 text-hack-green uppercase tracking-wider"><FiFolder /> VALFIT_GYM</h3>
@@ -201,7 +196,9 @@ const CONTENT = {
   settings: null,
   resume: null,
   discord: null,
-  github: null
+  github: null,
+  clients: null,
+  pricing: null
 };
 
 function App() {
@@ -263,7 +260,9 @@ function App() {
     settings: { isOpen: false, z: 20, pos: { x: 200, y: 200 } },
     resume:   { isOpen: false, z: 20, pos: { x: window.innerWidth > 768 ? 400 : 20, y: 50 } },
     discord:  { isOpen: false, z: 20, pos: { x: 230, y: 150 } },
-    github:   { isOpen: false, z: 20, pos: { x: 250, y: 180 } }
+    github:   { isOpen: false, z: 20, pos: { x: 250, y: 180 } },
+    clients:  { isOpen: false, z: 20, pos: { x: 280, y: 120 } },
+    pricing:  { isOpen: false, z: 20, pos: { x: 310, y: 90 } }
   });
 
   const openWindow = (id) => {
@@ -288,6 +287,123 @@ function App() {
 
   const dynamicContent = {
       ...CONTENT,
+      pricing: (
+        <div className="font-mono text-sm uppercase p-4 pb-24 md:pb-4">
+          <p className="text-hack-light mb-4 animate-pulse lowercase tracking-tighter font-bold"> fetching commercial_directives...</p>
+          <div className="space-y-8">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                 <div className="border-2 border-hack-green bg-black/70 backdrop-blur-sm p-4 relative group transition-all font-bold">
+                    [cite_start]<div className="absolute top-0 right-0 bg-hack-green text-black text-[10px] font-black px-2 py-0.5">$450.000 CLP [cite: 17, 22]</div>
+                    <h3 className="font-black text-lg mb-2 text-hack-green uppercase">ESSENTIAL_PAGE</h3>
+                    <div className="h-[1px] w-full bg-hack-green/30 my-2"></div>
+                    <ul className="text-xs text-hack-light space-y-2 lowercase font-mono">
+                       [cite_start]<li>» one-page layout [cite: 19]</li>
+                       [cite_start]<li>» sección de servicios y galería [cite: 19]</li>
+                       [cite_start]<li>» formulario de contacto vinculado [cite: 19]</li>
+                       [cite_start]<li>» entrega: 5-7 días hábiles [cite: 21]</li>
+                    </ul>
+                 </div>
+                 <div className="border-2 border-hack-green bg-black/70 backdrop-blur-sm p-4 relative group transition-all font-bold">
+                    [cite_start]<div className="absolute top-0 right-0 bg-hack-green text-black text-[10px] font-black px-2 py-0.5">$750.000 CLP [cite: 23, 28]</div>
+                    <h3 className="font-black text-lg mb-2 text-hack-green uppercase">BUSINESS_PAGE</h3>
+                    <div className="h-[1px] w-full bg-hack-green/30 my-2"></div>
+                    <ul className="text-xs text-hack-light space-y-2 lowercase font-mono">
+                       [cite_start]<li>» estructura multi-sección [cite: 25]</li>
+                       [cite_start]<li>» lighthouse score +90 [cite: 25]</li>
+                       [cite_start]<li>» seo de alta fidelidad [cite: 25]</li>
+                       [cite_start]<li>» entrega: 10-15 días hábiles [cite: 27]</li>
+                    </ul>
+                 </div>
+                 <div className="border-2 border-hack-green bg-black/70 backdrop-blur-sm p-4 relative group transition-all font-bold">
+                    [cite_start]<div className="absolute top-0 right-0 bg-hack-green text-black text-[10px] font-black px-2 py-0.5">DESDE $1.200.000 CLP [cite: 29, 34]</div>
+                    <h3 className="font-black text-lg mb-2 text-hack-green uppercase">ENTERPRISE_APP</h3>
+                    <div className="h-[1px] w-full bg-hack-green/30 my-2"></div>
+                    <ul className="text-xs text-hack-light space-y-2 lowercase font-mono">
+                       [cite_start]<li>» panel cms administrativo [cite: 31]</li>
+                       [cite_start]<li>» bases de datos [cite: 31]</li>
+                       [cite_start]<li>» integración api externa [cite: 31]</li>
+                       [cite_start]<li>» entrega: desde 21 días hábiles [cite: 33]</li>
+                    </ul>
+                 </div>
+              </div>
+  
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="border-2 border-hack-green/50 bg-black/70 backdrop-blur-sm p-4">
+                      [cite_start]<h3 className="text-hack-green font-black mb-3 border-b border-hack-green/30 pb-1">MODULE_EXTRAS [cite: 45]</h3>
+                      <ul className="text-xs text-white space-y-2 font-black uppercase">
+                          [cite_start]<li className="flex justify-between border-b border-hack-green/10 pb-1"><span>Multidioma (EN/ES)</span><span className="text-hack-green">+$150.000 [cite: 47]</span></li>
+                          [cite_start]<li className="flex justify-between border-b border-hack-green/10 pb-1"><span>Pasarela Webpay/Transbank</span><span className="text-hack-green">+$180.000 [cite: 48]</span></li>
+                          [cite_start]<li className="flex justify-between border-b border-hack-green/10 pb-1"><span>Blog Autogestionable</span><span className="text-hack-green">+$120.000 [cite: 49]</span></li>
+                          [cite_start]<li className="flex justify-between border-b border-hack-green/10 pb-1"><span>Sección adicional</span><span className="text-hack-green">+$80.000 [cite: 50]</span></li>
+                      </ul>
+                  </div>
+                  <div className="border-2 border-hack-green/50 bg-black/70 backdrop-blur-sm p-4">
+                      [cite_start]<h3 className="text-hack-green font-black mb-3 border-b border-hack-green/30 pb-1">CONTINUIDAD_OPERATIVA [cite: 38]</h3>
+                      [cite_start]<div className="flex justify-between mb-2 text-hack-green font-black"><span>FEE MENSUAL</span><span>$35.000 CLP [cite: 39]</span></div>
+                      <ul className="text-xs text-white/70 space-y-1 lowercase font-mono font-bold">
+                          [cite_start]<li>» alojamiento en red de borde [cite: 41]</li>
+                          [cite_start]<li>» mitigación de ataques ddos [cite: 42]</li>
+                          [cite_start]<li>» mantenimiento preventivo [cite: 43]</li>
+                          [cite_start]<li>» soporte técnico directo [cite: 44]</li>
+                      </ul>
+                  </div>
+              </div>
+  
+              <div className="text-center mt-4">
+                  <button onClick={() => openWindow('contact')} className="border-2 border-hack-green hover:bg-hack-green hover:text-black transition-colors px-6 py-2 text-xs font-black text-white uppercase shadow-[0_0_10px_rgba(0,255,0,0.2)]">INICIAR_COTIZACIÓN</button>
+              </div>
+          </div>
+        </div>
+      ),
+      clients: (
+        <div className="font-mono text-sm uppercase p-4 pb-24 md:pb-4">
+          <p className="text-hack-light mb-4 animate-pulse lowercase tracking-tighter font-bold"> accessing client_database...</p>
+
+          <div className="border-2 border-hack-green bg-black/70 backdrop-blur-sm p-6 relative group shadow-[0_0_20px_rgba(0,255,0,0.1)] transition-all font-bold">
+              <div className="absolute top-0 right-0 bg-hack-green text-black text-[10px] font-black px-3 py-1 uppercase tracking-widest">Active_Client</div>
+              
+              <h3 className="font-black text-2xl mb-1 flex items-center gap-2 text-hack-green uppercase tracking-wider">
+                 <FiBriefcase /> TelaSky
+              </h3>
+              <p className="text-[10px] text-hack-light tracking-widest mb-4 font-black">INDUSTRY: TECNOLOGÍA / SERVICIOS DIGITALES</p>
+
+              <div className="h-[2px] w-full bg-hack-green/30 my-4"></div>
+
+              <h4 className="text-hack-green font-black mb-2 mt-4">// PROJECT_OVERVIEW</h4>
+              <p className="text-xs text-white/90 mb-6 lowercase font-mono leading-relaxed font-bold">
+                 diseño y desarrollo integral de la plataforma web corporativa para telasky. el enfoque principal fue establecer una presencia digital de alto rendimiento, optimizando la velocidad de carga, la estructura seo técnica y garantizando una experiencia de usuario (ux) fluida y enfocada en la conversión. la arquitectura empleada permite escalabilidad futura ante picos de tráfico.
+              </p>
+
+              <h4 className="text-hack-green font-black mb-2">// KEY_ACHIEVEMENTS</h4>
+              <ul className="text-xs text-white/80 space-y-2 lowercase font-mono mb-6 font-bold">
+                 <li><span className="text-hack-green mr-2">»</span>rendimiento lighthouse superior al 95%.</li>
+                 <li><span className="text-hack-green mr-2">»</span>diseño "mobile-first" 100% responsivo.</li>
+                 <li><span className="text-hack-green mr-2">»</span>interfaz moderna adaptada a la identidad de marca.</li>
+                 <li><span className="text-hack-green mr-2">»</span>reducción de tasa de rebote mediante ui optimizada.</li>
+              </ul>
+
+              <h4 className="text-hack-green font-black mb-2">// TECH_STACK</h4>
+              <div className="flex flex-wrap gap-2 text-[10px] tracking-widest mb-6 text-black font-black uppercase">
+                  <span className="bg-hack-green px-2 py-1">REACT.JS</span>
+                  <span className="bg-hack-green px-2 py-1">TAILWIND_CSS</span>
+                  <span className="bg-hack-green px-2 py-1">VITE</span>
+                  <span className="bg-hack-green px-2 py-1">SEO_OPTIMIZED</span>
+              </div>
+
+              <div className="h-[2px] w-full bg-hack-green/30 my-4"></div>
+
+              <div className="flex flex-col md:flex-row gap-4 items-center justify-between mt-6">
+                  <a href="https://telasky.com" target="_blank" rel="noreferrer" className="w-full md:w-auto px-6 border-2 border-hack-green hover:bg-hack-green hover:text-black py-2 text-sm font-black transition-colors text-white cursor-pointer uppercase flex items-center justify-center gap-2">
+                    <FiExternalLink /> DEPLOYMENT_ACCESS
+                  </a>
+                  
+                  <div onClick={() => openWindow('contact')} className="text-[10px] text-hack-light hover:text-hack-green transition-colors cursor-pointer text-center md:text-right font-black tracking-widest">
+                     ¿REQUERIMIENTOS SIMILARES?<br/><span className="underline decoration-hack-green/50 hover:decoration-hack-green">INICIAR_PROTOCOLO_DE_CONTACTO</span>
+                  </div>
+              </div>
+          </div>
+        </div>
+      ),
       github: (
         <div className="font-mono p-6 flex flex-col items-center justify-center text-center space-y-6">
           <div className="w-24 h-24 bg-white/10 rounded-xl flex items-center justify-center border border-white/20 shadow-xl">
@@ -502,9 +618,10 @@ function App() {
             <Taskbar openWindow={openWindow} />
 
             <div className="absolute top-16 left-4 md:top-20 md:left-6 flex flex-col md:gap-8 z-10 select-none pb-20 font-black">
-                {/* En móvil usamos Grid, en Desktop Flex */}
                 <div className="grid grid-cols-2 gap-4 md:flex md:flex-col md:gap-8">
                     <DesktopIcon icon={<FiFolder className="text-3xl md:text-4xl" />} label="PROJECTS" onClick={() => openWindow('projects')} onHover={playHover} />
+                    <DesktopIcon icon={<FiBriefcase className="text-3xl md:text-4xl" />} label="CLIENTS" onClick={() => openWindow('clients')} onHover={playHover} />
+                    <DesktopIcon icon={<FiDollarSign className="text-3xl md:text-4xl" />} label="PRICING" onClick={() => openWindow('pricing')} onHover={playHover} />
                     <DesktopIcon icon={<FiTerminal className="text-3xl md:text-4xl" />} label="WHOAMI" onClick={() => openWindow('about')} onHover={playHover} />
                     <DesktopIcon icon={<FiCpu className="text-3xl md:text-4xl" />} label="SKILLS" onClick={() => openWindow('skills')} onHover={playHover} />
                     <DesktopIcon icon={<FiMail className="text-3xl md:text-4xl" />} label="CONTACT" onClick={() => openWindow('contact')} onHover={playHover} />
@@ -523,8 +640,8 @@ function App() {
                             isOpen={windowsState[id].isOpen} zIndex={windowsState[id].z}
                             initialPosition={windowsState[id].pos}
                             onClose={() => closeWindow(id)} onFocus={focusWindow}
-                            width={id === 'discord' || id === 'github' ? 'md:w-[350px]' : (id === 'resume' ? 'md:w-[850px]' : (id === 'terminal' ? 'md:w-[700px]' : 'md:w-[500px]'))}
-                            height={id === 'discord' || id === 'github' ? 'h-auto' : (id === 'resume' ? 'h-[80vh]' : (id === 'terminal' ? 'h-[500px]' : 'h-auto'))}
+                            width={id === 'discord' || id === 'github' || id === 'clients' ? 'md:w-[350px]' : (id === 'resume' || id === 'pricing' ? 'md:w-[850px]' : (id === 'terminal' ? 'md:w-[700px]' : 'md:w-[600px]'))}
+                            height={id === 'discord' || id === 'github' || id === 'clients' ? 'h-auto' : (id === 'resume' || id === 'pricing' ? 'h-[80vh]' : (id === 'terminal' ? 'h-[500px]' : 'h-auto'))}
                         >
                             {dynamicContent[id]}
                         </OSWindow>

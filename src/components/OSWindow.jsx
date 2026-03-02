@@ -57,7 +57,13 @@ const OSWindow = ({ id, title, isOpen, onClose, children, zIndex, onFocus, initi
             </div>
 
             <div className="flex gap-4 md:gap-2 shrink-0">
-               <button className="hidden md:block hover:bg-hack-darker hover:text-hack-green p-0.5 border border-hack-darker transition-colors pointer-events-auto" onClick={(e) => e.stopPropagation()}>
+               <button 
+                  onClick={(e) => {
+                      e.stopPropagation();
+                      onClose();
+                  }}
+                  className="hidden md:block hover:bg-hack-darker hover:text-hack-green p-0.5 border border-hack-darker transition-colors pointer-events-auto"
+               >
                   <FiMinus />
                </button>
                
