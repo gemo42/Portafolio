@@ -310,44 +310,64 @@ function App() {
         <div className="font-mono text-sm uppercase p-4 pb-24 md:pb-4">
           <p className="text-hack-light mb-4 animate-pulse lowercase tracking-tighter font-bold"> fetching commercial_directives...</p>
           <div className="space-y-8">
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                  <div className="border-2 border-hack-green bg-black/70 backdrop-blur-sm p-4 relative group transition-all font-bold flex flex-col">
-                    <h3 className="font-black text-lg mb-2 text-hack-green uppercase">ESSENTIAL_PAGE</h3>
+                    <h3 className="font-black text-lg mb-2 text-hack-green uppercase">LANDING_PAGE</h3>
                     <div className="h-[1px] w-full bg-hack-green/30 my-2"></div>
                     <ul className="text-xs text-hack-light space-y-2 lowercase font-mono flex-1">
-                       <li>» one-page layout</li>
-                       <li>» sección de servicios y galería</li>
-                       <li>» formulario de contacto vinculado</li>
-                       <li>» entrega: 5-7 días hábiles</li>
+                       <li>» diseño one-page (mobile first)</li>
+                       <li>» formulario de contacto integrado</li>
+                       <li>» redirección a whatsapp</li>
+                       <li>» seo técnico base</li>
+                       <li>» mantención: 2 mod/mes</li>
                     </ul>
                     <div className="mt-4 border border-hack-green/30 bg-hack-green/10 p-2 text-center text-hack-green font-black text-xs">
-                        PRECIO: $450.000 CLP
+                        PRECIO: $150.000 CLP
                     </div>
                  </div>
+
                  <div className="border-2 border-hack-green bg-black/70 backdrop-blur-sm p-4 relative group transition-all font-bold flex flex-col">
-                    <h3 className="font-black text-lg mb-2 text-hack-green uppercase">BUSINESS_PAGE</h3>
+                    <h3 className="font-black text-lg mb-2 text-hack-green uppercase">WEB_CORPORATIVA</h3>
                     <div className="h-[1px] w-full bg-hack-green/30 my-2"></div>
                     <ul className="text-xs text-hack-light space-y-2 lowercase font-mono flex-1">
-                       <li>» estructura multi-sección</li>
-                       <li>» lighthouse score +90</li>
-                       <li>» seo de alta fidelidad</li>
-                       <li>» entrega: 10-15 días hábiles</li>
+                       <li>» hasta 5 sub-páginas estáticas</li>
+                       <li>» formularios avanzados</li>
+                       <li>» google analytics integrado</li>
+                       <li>» seo avanzado por página</li>
+                       <li>» mantención: 4 mod/mes</li>
                     </ul>
                     <div className="mt-4 border border-hack-green/30 bg-hack-green/10 p-2 text-center text-hack-green font-black text-xs">
-                        PRECIO: $750.000 CLP
+                        PRECIO: $350.000 CLP
                     </div>
                  </div>
+
                  <div className="border-2 border-hack-green bg-black/70 backdrop-blur-sm p-4 relative group transition-all font-bold flex flex-col">
-                    <h3 className="font-black text-lg mb-2 text-hack-green uppercase">ENTERPRISE_APP</h3>
+                    <h3 className="font-black text-lg mb-2 text-hack-green uppercase">PLATAFORMA_AVANZADA</h3>
                     <div className="h-[1px] w-full bg-hack-green/30 my-2"></div>
                     <ul className="text-xs text-hack-light space-y-2 lowercase font-mono flex-1">
-                       <li>» panel cms administrativo</li>
+                       <li>» arquitectura headless (cms)</li>
+                       <li>» autogestión de contenido</li>
+                       <li>» integración de apis</li>
                        <li>» bases de datos</li>
-                       <li>» integración api externa</li>
-                       <li>» entrega: desde 21 días hábiles</li>
+                       <li>» soporte continuo y sla</li>
                     </ul>
                     <div className="mt-4 border border-hack-green/30 bg-hack-green/10 p-2 text-center text-hack-green font-black text-xs">
-                        PRECIO: DESDE $1.200.000 CLP
+                        PRECIO: $650.000 CLP
+                    </div>
+                 </div>
+
+                 <div className="border-2 border-hack-green bg-black/70 backdrop-blur-sm p-4 relative group transition-all font-bold flex flex-col">
+                    <h3 className="font-black text-lg mb-2 text-hack-green uppercase">DESARROLLO_CUSTOM</h3>
+                    <div className="h-[1px] w-full bg-hack-green/30 my-2"></div>
+                    <ul className="text-xs text-hack-light space-y-2 lowercase font-mono flex-1">
+                       <li>» microservicios o monolito</li>
+                       <li>» sistemas de pago integrados</li>
+                       <li>» paneles administrativos</li>
+                       <li>» escalabilidad horizontal</li>
+                       <li>» contrato de retención a medida</li>
+                    </ul>
+                    <div className="mt-4 border border-hack-green/30 bg-hack-green/10 p-2 text-center text-hack-green font-black text-xs">
+                        PRECIO: A COTIZAR
                     </div>
                  </div>
               </div>
@@ -363,19 +383,18 @@ function App() {
                       </ul>
                   </div>
                   <div className="border-2 border-hack-green/50 bg-black/70 backdrop-blur-sm p-4 flex flex-col">
-                      <h3 className="text-hack-green font-black mb-3 border-b border-hack-green/30 pb-1">CONTINUIDAD_OPERATIVA</h3>
-                      <div className="flex justify-between mb-2 text-hack-green font-black"><span>FEE MENSUAL</span><span>$35.000 CLP</span></div>
+                      <h3 className="text-hack-green font-black mb-3 border-b border-hack-green/30 pb-1">AVISO_INFRAESTRUCTURA</h3>
+                      <div className="flex justify-between mb-2 text-hack-green font-black"><span>DOMINIO & HOSTING</span><span>EXTERNO</span></div>
                       <ul className="text-xs text-white/70 space-y-1 lowercase font-mono font-bold flex-1">
-                          <li>» alojamiento en red de borde</li>
-                          <li>» mitigación de ataques ddos</li>
-                          <li>» mantenimiento preventivo</li>
-                          <li>» soporte técnico directo</li>
+                          <li>» registro de dominios (.cl/.com) no incluidos en desarrollo base.</li>
+                          <li>» facturación de servidores (vercel pro/aws) asumida por el cliente.</li>
+                          <li>» mantención mensual requerida para sla prioritario y actualizaciones técnicas continuas.</li>
                       </ul>
                   </div>
               </div>
   
               <div className="text-center mt-4">
-                  <button onClick={() => openWindow('contact')} className="border-2 border-hack-green hover:bg-hack-green hover:text-black transition-colors px-6 py-2 text-xs font-black text-white uppercase shadow-[0_0_10px_rgba(0,255,0,0.2)]">INICIAR_COTIZACIÓN</button>
+                  <a href="https://creacionweb.vercel.app" target="_blank" rel="noreferrer" className="inline-block border-2 border-hack-green hover:bg-hack-green hover:text-black transition-colors px-6 py-2 text-xs font-black text-white uppercase shadow-[0_0_10px_rgba(0,255,0,0.2)]">INICIAR_COTIZACIÓN</a>
               </div>
           </div>
         </div>
